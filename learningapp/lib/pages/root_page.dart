@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learningapp/pages/admincourse.dart';
 import 'login_signup_page.dart';
 import 'package:learningapp/service/authentication.dart';
 import 'home_page.dart';
@@ -21,7 +22,7 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
-
+String _u;
   @override
   void initState() {
     super.initState();
@@ -40,6 +41,9 @@ class _RootPageState extends State<RootPage> {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
+        print('hello');
+        print(user.email);
+        _u=user.email;
       });
     });
     setState(() {
@@ -77,11 +81,22 @@ class _RootPageState extends State<RootPage> {
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          return new HomePage(
-            userId: _userId,
-            auth: widget.auth,
-            logoutCallback: logoutCallback,
-          );
+          print("hi");
+          print(_userId);
+          if(_u=='ashish@gmail.com') {
+             return new AdminCourse(userId: _userId,
+               auth: widget.auth,
+               logoutCallback: logoutCallback,);
+
+          }
+          else
+            {
+              return new HomePage(
+                userId: _userId,
+                auth: widget.auth,
+                logoutCallback: logoutCallback,
+              );
+            }
         } else
           return buildWaitingScreen();
         break;

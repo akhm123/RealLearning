@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:learningapp/service/authentication.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -26,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   StreamSubscription<Event> _onTodoAddedSubscription;
   StreamSubscription<Event> _onTodoChangedSubscription;
 
-  Query _todoQuery;
+  //Query _todoQuery;
 
   //bool _isEmailVerified = false;
 
@@ -36,77 +38,77 @@ class _HomePageState extends State<HomePage> {
 
     //_checkEmailVerification();
 
-    _todoList = new List();
-    _todoQuery = _database
-        .reference()
-        .child("todo")
-        .orderByChild("userId")
-        .equalTo(widget.userId);
-    _onTodoAddedSubscription = _todoQuery.onChildAdded.listen(onEntryAdded);
-    _onTodoChangedSubscription =
-        _todoQuery.onChildChanged.listen(onEntryChanged);
+//    _todoList = new List();
+//    _todoQuery = _database
+//        .reference()
+//        .child("todo")
+//        .orderByChild("userId")
+//        .equalTo(widget.userId);
+//    _onTodoAddedSubscription = _todoQuery.onChildAdded.listen(onEntryAdded);
+//    _onTodoChangedSubscription =
+//        _todoQuery.onChildChanged.listen(onEntryChanged);
   }
 
-//  void _checkEmailVerification() async {
-//    _isEmailVerified = await widget.auth.isEmailVerified();
-//    if (!_isEmailVerified) {
-//      _showVerifyEmailDialog();
-//    }
-//  }
-
-//  void _resentVerifyEmail(){
-//    widget.auth.sendEmailVerification();
-//    _showVerifyEmailSentDialog();
-//  }
-
-//  void _showVerifyEmailDialog() {
-//    showDialog(
-//      context: context,
-//      builder: (BuildContext context) {
-//        // return object of type Dialog
-//        return AlertDialog(
-//          title: new Text("Verify your account"),
-//          content: new Text("Please verify account in the link sent to email"),
-//          actions: <Widget>[
-//            new FlatButton(
-//              child: new Text("Resent link"),
-//              onPressed: () {
-//                Navigator.of(context).pop();
-//                _resentVerifyEmail();
-//              },
-//            ),
-//            new FlatButton(
-//              child: new Text("Dismiss"),
-//              onPressed: () {
-//                Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-//  }
-
-//  void _showVerifyEmailSentDialog() {
-//    showDialog(
-//      context: context,
-//      builder: (BuildContext context) {
-//        // return object of type Dialog
-//        return AlertDialog(
-//          title: new Text("Verify your account"),
-//          content: new Text("Link to verify account has been sent to your email"),
-//          actions: <Widget>[
-//            new FlatButton(
-//              child: new Text("Dismiss"),
-//              onPressed: () {
-//                Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-//  }
+////  void _checkEmailVerification() async {
+////    _isEmailVerified = await widget.auth.isEmailVerified();
+////    if (!_isEmailVerified) {
+////      _showVerifyEmailDialog();
+////    }
+////  }
+//
+////  void _resentVerifyEmail(){
+////    widget.auth.sendEmailVerification();
+////    _showVerifyEmailSentDialog();
+////  }
+//
+////  void _showVerifyEmailDialog() {
+////    showDialog(
+////      context: context,
+////      builder: (BuildContext context) {
+////        // return object of type Dialog
+////        return AlertDialog(
+////          title: new Text("Verify your account"),
+////          content: new Text("Please verify account in the link sent to email"),
+////          actions: <Widget>[
+////            new FlatButton(
+////              child: new Text("Resent link"),
+////              onPressed: () {
+////                Navigator.of(context).pop();
+////                _resentVerifyEmail();
+////              },
+////            ),
+////            new FlatButton(
+////              child: new Text("Dismiss"),
+////              onPressed: () {
+////                Navigator.of(context).pop();
+////              },
+////            ),
+////          ],
+////        );
+////      },
+////    );
+////  }
+//
+////  void _showVerifyEmailSentDialog() {
+////    showDialog(
+////      context: context,
+////      builder: (BuildContext context) {
+////        // return object of type Dialog
+////        return AlertDialog(
+////          title: new Text("Verify your account"),
+////          content: new Text("Link to verify account has been sent to your email"),
+////          actions: <Widget>[
+////            new FlatButton(
+////              child: new Text("Dismiss"),
+////              onPressed: () {
+////                Navigator.of(context).pop();
+////              },
+////            ),
+////          ],
+////        );
+////      },
+////    );
+////  }
 
   @override
   void dispose() {
@@ -209,7 +211,7 @@ class _HomePageState extends State<HomePage> {
             String todoId = _todoList[index].key;
             String subject = _todoList[index].subject;
             bool completed = _todoList[index].completed;
-            String userId = _todoList[index].userId;
+            // String userId = _todoList[index].userId;
             return Dismissible(
               key: Key(todoId),
               background: Container(color: Colors.red),
@@ -248,22 +250,171 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Flutter login demo'),
-          actions: <Widget>[
-            new FlatButton(
-                child: new Text('Logout',
-                    style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-                onPressed: signOut)
-          ],
-        ),
-        body: showTodoList(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showAddTodoDialog(context);
-          },
-          tooltip: 'Increment',
-          child: Icon(Icons.add),
-        ));
+      appBar: new AppBar(
+        title: new Text('Flutter login demo'),
+        actions: <Widget>[
+          new FlatButton(
+              child: new Text('Logout',
+                  style: new TextStyle(fontSize: 17.0, color: Colors.white)),
+              onPressed: signOut)
+        ],
+      ),
+      body:new MyStatelessWidget(),
+
+    );
+  }
+}
+class MyStatelessWidget extends StatelessWidget {
+  MyStatelessWidget({Key key}) : super(key: key);
+
+  Future getAllCourses() async
+  {
+    var firestore = Firestore.instance;
+    QuerySnapshot qn = await firestore.collection('course').getDocuments();
+    return qn.documents;
+  }
+
+  final List<String> entries = <String>['A', 'B', 'C'];
+  final List<int> colorCodes = <int>[600, 500, 100];
+//  final QuerySnapshot result =
+//  await Firestore.instance.collection('course').getDocuments();
+//  final List<DocumentSnapshot> documents = result.documents;
+  //final ref = FirebaseStorage.instance.ref().child('testimage');
+// no need of the file extension, the name will do fine.
+ // var url = await ref.getDownloadURL();
+  @override
+  Widget build(BuildContext context) {
+//    return Center(
+//      child: Card(
+//        child: Column(
+//          mainAxisSize: MainAxisSize.min,
+//          children: <Widget>[
+//            const ListTile(
+//              leading: Icon(Icons.album),
+//              title: Text('The Enchanted Nightingale'),
+//              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+//            ),
+//            ButtonBar(
+//              children: <Widget>[
+//                FlatButton(
+//                  child: const Text('BUY TICKETS'),
+//                  onPressed: () { /* ... */ },
+//                ),
+//                FlatButton(
+//                  child: const Text('LISTEN'),
+//                  onPressed: () { /* ... */ },
+//                ),
+//              ],
+//            ),
+//          ],
+//        ),
+//      ),
+//    );
+
+
+
+    return Container(
+    child:Card(
+      child:FutureBuilder(
+        future:getAllCourses(),
+        builder:(_,snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+    return Center(
+    child: Text("loading..."),
+    );
+    }
+    else {
+    return ListView.builder(
+//                     padding: const EdgeInsets.all(8),
+    itemCount: snapshot.data.length,
+    itemBuilder: (_, index) {
+//                  return Container(
+//                    height: 50,
+//                    color: Colors.amber[colorCodes[index]],
+//                    child: Center(child: Text(snapshot.data[index].data["name"])),
+//
+//                  );
+    return ListTile(
+    leading: ConstrainedBox(
+    constraints: BoxConstraints(
+    minWidth: 44,
+    minHeight: 44,
+    maxWidth: 64,
+    maxHeight: 64,
+    ),
+
+     child: Image.network(snapshot.data[index].data["imageurl"]),
+
+    ),
+
+    title: Text(snapshot.data[index].data["name"]),
+//                         height: 50,
+//                         color: Colors.amber[colorCodes[index]],
+    subtitle: Text(snapshot.data[index].data["description"]),
+    trailing:
+    FlatButton(
+    color: Colors.blue,
+    textColor: Colors.white,
+    disabledColor: Colors.grey,
+    disabledTextColor: Colors.black,
+    padding: EdgeInsets.all(8.0),
+    splashColor: Colors.blueAccent,
+    onPressed: () {
+    /*...*/
+    },
+    child: Text(
+    "buy course",
+    style: TextStyle(fontSize: 20.0),
+    ),
+    ),
+
+    );
+
+
+    }
+    );
+
+    }
+    })
+    )
+    );
+  }
+  }
+
+
+class CustomCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return  new Card(
+      child: new Column(
+        children: <Widget>[
+          new Image.asset('images/logo.jpg'),
+          new Padding(
+              padding: new EdgeInsets.all(7.0),
+              child: new Row(
+                children: <Widget>[
+                  new Padding(
+                    padding: new EdgeInsets.all(7.0),
+                    child: new Icon(Icons.thumb_up),
+                  ),
+                  new Padding(
+                    padding: new EdgeInsets.all(7.0),
+                    child: new Text('Like',style: new TextStyle(fontSize: 18.0),),
+                  ),
+                  new Padding(
+                    padding: new EdgeInsets.all(7.0),
+                    child: new Icon(Icons.comment),
+                  ),
+                  new Padding(
+                    padding: new EdgeInsets.all(7.0),
+                    child: new Text('Comments',style: new TextStyle(fontSize: 18.0)),
+                  )
+
+                ],
+              )
+          )
+        ],
+      ),
+    );
   }
 }

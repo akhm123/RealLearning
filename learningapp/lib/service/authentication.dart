@@ -42,14 +42,22 @@ class Auth implements BaseAuth {
         email: email, password: password);
 
  FirebaseUser user=result.user;
-    Firestore.instance.collection('users').document().setData({
-      'name': name,
-      'uid':user.uid,
-      'email': user.email,
-      'isEmailVerified': user.isEmailVerified, // will also be false
-      'photoUrl': user.photoUrl, // will always be null
-    }
-    ).catchError((err) => print(err));
+//    Firestore.instance.collection('users').document().setData({
+//      'name': name,
+//      'uid':user.uid,
+//      'email': user.email,
+//      'isEmailVerified': user.isEmailVerified, // will also be false
+//      'photoUrl': user.photoUrl, // will always be null
+//    }
+//    ).catchError((err) => print(err));
+    try
+    {
+    Firestore.instance.collection('users').document().setData({ 'userid': user.uid, 'name': name ,'email': user.email,});
+  } catch (error) {
+  print('Error: $error');
+  // Do something to show user
+  }
+    return user.uid;
   }
 
   Future<FirebaseUser> getCurrentUser() async {
