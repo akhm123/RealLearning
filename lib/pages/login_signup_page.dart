@@ -92,7 +92,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
+<<<<<<< HEAD
           title: new Text('Real Learning'),
+=======
+          title: new Text('Flutter login demo'),
+>>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
         ),
         body: Stack(
           children: <Widget>[
@@ -144,7 +148,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             shrinkWrap: true,
             children: <Widget>[
               showLogo(),
+<<<<<<< HEAD
               if(_isLoginForm==false) showNameInput(),
+=======
+              showNameInput(),
+>>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
               showEmailInput(),
               showPasswordInput(),
               showPrimaryButton(),

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"_info":"// This is a generated file; do not edit or check into version control.","dependencyGraph":[{"name":"cloud_firestore","dependencies":["firebase_core"]},{"name":"firebase_analytics","dependencies":[]},{"name":"firebase_auth","dependencies":["firebase_core"]},{"name":"firebase_core","dependencies":[]},{"name":"firebase_database","dependencies":["firebase_core"]},{"name":"firebase_storage","dependencies":["firebase_core"]},{"name":"image_picker","dependencies":[]}]}
+=======
+{"_info":"// This is a generated file; do not edit or check into version control.","dependencyGraph":[{"name":"cloud_firestore","dependencies":["firebase_core"]},{"name":"firebase_analytics","dependencies":[]},{"name":"firebase_auth","dependencies":["firebase_core"]},{"name":"firebase_core","dependencies":[]},{"name":"firebase_database","dependencies":["firebase_core"]}]}
+>>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9

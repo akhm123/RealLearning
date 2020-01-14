@@ -24,10 +24,14 @@ dependencies:
   firebase_core: ^0.4.0+9
   firebase_analytics: ^5.0.2
   firebase_database: ^3.0.9
-  cloud_firestore: ^0.11.0
+<<<<<<< HEAD
+  cloud_firestore : ^0.11.0
   firebase_storage: ^3.0.2
   image_picker: ^0.6.0+17
 
+=======
+  # cloud_firestore: ^0.11.0
+>>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -41,7 +45,11 @@ dev_dependencies:
   # Add the dependencies for any other Firebase products you want to use in your app
   # For example, to use Firebase Authentication and Cloud Firestore
   firebase_auth: ^0.14.0+5
+<<<<<<< HEAD
 #  cloud_firestore: ^0.12.9+5
+=======
+  cloud_firestore: ^0.12.9+5
+>>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -52,6 +60,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+<<<<<<< HEAD
   assets:
 
     - images/logo.jpg
@@ -60,6 +69,13 @@ flutter:
   # assets:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
+=======
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+ 
+    - images/logo.jpg
+>>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

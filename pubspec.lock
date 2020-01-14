@@ -37,12 +37,20 @@ packages:
     source: hosted
     version: "1.1.2"
   cloud_firestore:
+<<<<<<< HEAD
     dependency: "direct main"
+=======
+    dependency: "direct dev"
+>>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
     description:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.11.0+2"
+=======
+    version: "0.12.11"
+>>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
   collection:
     dependency: transitive
     description:
@@ -99,6 +107,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.9"
+<<<<<<< HEAD
   firebase_storage:
     dependency: "direct main"
     description:
@@ -106,6 +115,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.10"
+=======
+>>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
   flutter:
     dependency: "direct main"
     description: flutter
@@ -137,6 +148,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.4"
+<<<<<<< HEAD
   image_picker:
     dependency: "direct main"
     description:
@@ -144,6 +156,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.2+2"
+=======
+>>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
   matcher:
     dependency: transitive
     description:
