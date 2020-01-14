@@ -17,16 +17,6 @@ allprojects {
         google()
         jcenter()
     }
-<<<<<<< HEAD
-=======
-    gradle.taskGraph.whenReady {
-        tasks.each { task ->
-            if (task.name.equals('mockableAndroidJar')) {
-                task.enabled = false
-            }
-        }
-    }
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
 }
 
 rootProject.buildDir = '../build'
