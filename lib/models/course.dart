@@ -5,14 +5,9 @@ class Course {
   String courseName;
   String courseDescription;
   String courseImage;
-<<<<<<< HEAD
   String courseOverView;
   Course( {this.courseName, this.courseDescription, this.courseImage});
 }/*
-=======
-
-  Course({this.courseName, this.courseDescription, this.courseImage});
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
 
   Course.fromSnapshot(DataSnapshot snapshot) :
   
@@ -37,8 +32,4 @@ static List<Course> allCourse()
    lstOfCourse.add(new Course(courseName:"GATE 2021",courseDescription: "To get IIT if you missed a chance at B.tech you can go through M.tech and for that GATE is compulsary.",courseImage: "cat.png"));
   return lstOfCourse;
 }
-<<<<<<< HEAD
 }*/
-=======
-}
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9

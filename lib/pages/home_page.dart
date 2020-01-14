@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:learningapp/models/course.dart';
 import 'package:learningapp/pages/coursedetail.dart';
-=======
-import 'package:flutter/material.dart';
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
 import 'package:learningapp/service/authentication.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:learningapp/models/todo.dart';
@@ -34,11 +30,7 @@ class _HomePageState extends State<HomePage> {
   StreamSubscription<Event> _onTodoAddedSubscription;
   StreamSubscription<Event> _onTodoChangedSubscription;
 
-<<<<<<< HEAD
   //Query _todoQuery;
-=======
-  Query _todoQuery;
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
 
   //bool _isEmailVerified = false;
 
@@ -48,7 +40,6 @@ class _HomePageState extends State<HomePage> {
 
     //_checkEmailVerification();
 
-<<<<<<< HEAD
 //    _todoList = new List();
 //    _todoQuery = _database
 //        .reference()
@@ -58,17 +49,6 @@ class _HomePageState extends State<HomePage> {
 //    _onTodoAddedSubscription = _todoQuery.onChildAdded.listen(onEntryAdded);
 //    _onTodoChangedSubscription =
 //        _todoQuery.onChildChanged.listen(onEntryChanged);
-=======
-    _todoList = new List();
-    _todoQuery = _database
-        .reference()
-        .child("todo")
-        .orderByChild("userId")
-        .equalTo(widget.userId);
-    _onTodoAddedSubscription = _todoQuery.onChildAdded.listen(onEntryAdded);
-    _onTodoChangedSubscription =
-        _todoQuery.onChildChanged.listen(onEntryChanged);
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
   }
 
 ////  void _checkEmailVerification() async {
@@ -199,21 +179,12 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 new Expanded(
                     child: new TextField(
-<<<<<<< HEAD
                   controller: _textEditingController,
                   autofocus: true,
                   decoration: new InputDecoration(
                     labelText: 'Add new todo',
                   ),
                 ))
-=======
-                      controller: _textEditingController,
-                      autofocus: true,
-                      decoration: new InputDecoration(
-                        labelText: 'Add new todo',
-                      ),
-                    ))
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
               ],
             ),
             actions: <Widget>[
@@ -242,11 +213,7 @@ class _HomePageState extends State<HomePage> {
             String todoId = _todoList[index].key;
             String subject = _todoList[index].subject;
             bool completed = _todoList[index].completed;
-<<<<<<< HEAD
             // String userId = _todoList[index].userId;
-=======
-           // String userId = _todoList[index].userId;
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
             return Dismissible(
               key: Key(todoId),
               background: Container(color: Colors.red),
@@ -261,17 +228,10 @@ class _HomePageState extends State<HomePage> {
                 trailing: IconButton(
                     icon: (completed)
                         ? Icon(
-<<<<<<< HEAD
                             Icons.done_outline,
                             color: Colors.green,
                             size: 20.0,
                           )
-=======
-                      Icons.done_outline,
-                      color: Colors.green,
-                      size: 20.0,
-                    )
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
                         : Icon(Icons.done, color: Colors.grey, size: 20.0),
                     onPressed: () {
                       updateTodo(_todoList[index]);
@@ -282,24 +242,16 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Center(
           child: Text(
-<<<<<<< HEAD
         "Welcome. Your list is empty",
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 30.0),
       ));
-=======
-            "Welcome. Your list is empty",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 30.0),
-          ));
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-<<<<<<< HEAD
       appBar: new AppBar(
         title: new Text('Flutter login demo'),
         actions: <Widget>[
@@ -412,67 +364,6 @@ class MyStatelessWidget extends StatelessWidget {
           new Image.network(snapshot.data[index].data["imageurl"]),
            Text(snapshot.data[index].data["name"]),
             Text(snapshot.data[index].data["description"]),
-=======
-        appBar: new AppBar(
-          title: new Text('Flutter login demo'),
-          actions: <Widget>[
-            new FlatButton(
-                child: new Text('Logout',
-                    style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-                onPressed: signOut)
-          ],
-        ),
-        body:new MyStatelessWidget(),
-
-        );
-  }
-}
-class MyStatelessWidget extends StatelessWidget {
- MyStatelessWidget({Key key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-                new Image.asset('images/logo.jpg'),
-               Container(
-          padding: EdgeInsets.all(0),
-        ),
-            const ListTile(
-              leading: Icon(Icons.album),
-              title: Text('The Enchanted Nightingale'),
-              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-            ),
-            ButtonBar(
-              children: <Widget>[
-                FlatButton(
-                  child: const Text('BUY COURSE'),
-                  onPressed: () {/* ... */},
-                ),
-                FlatButton(
-                  child: const Text('DETAILS'),
-                  onPressed: () {/* ... */},
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-class CustomCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return  new Card(
-      child: new Column(
-        children: <Widget>[
-          new Image.asset('images/logo.jpg'),
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
           new Padding(
               padding: new EdgeInsets.all(7.0),
               child: new Row(
@@ -499,7 +390,6 @@ class CustomCard extends StatelessWidget {
           )
         ],
       ),
-<<<<<<< HEAD
     )
           */
                            ) );
@@ -508,8 +398,3 @@ class CustomCard extends StatelessWidget {
                 }));
   }
 }
-=======
-    );
-  }
-}
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9

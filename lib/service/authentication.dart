@@ -1,8 +1,5 @@
 import 'dart:async';
-<<<<<<< HEAD
 import 'package:cloud_firestore/cloud_firestore.dart';
-=======
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class BaseAuth {
@@ -55,11 +52,7 @@ class Auth implements BaseAuth {
 //    ).catchError((err) => print(err));
     try
     {
-<<<<<<< HEAD
     Firestore.instance.collection('users').document().setData({ 'userid': user.uid, 'name': name ,'email': user.email,});
-=======
-  //  Firestore.instance.collection('users').document().setData({ 'userid': user.uid, 'name': name ,'email': user.email,});
->>>>>>> 730c4f3a4fddb47db92e1308f29226c73a1d0fe9
   } catch (error) {
   print('Error: $error');
   // Do something to show user
