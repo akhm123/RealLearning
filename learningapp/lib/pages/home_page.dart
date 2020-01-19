@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
+import 'package:learningapp/models/course.dart';
+import 'package:learningapp/pages/coursedetail.dart';
 import 'package:learningapp/service/authentication.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:learningapp/models/todo.dart';
@@ -177,12 +179,12 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 new Expanded(
                     child: new TextField(
-                      controller: _textEditingController,
-                      autofocus: true,
-                      decoration: new InputDecoration(
-                        labelText: 'Add new todo',
-                      ),
-                    ))
+                  controller: _textEditingController,
+                  autofocus: true,
+                  decoration: new InputDecoration(
+                    labelText: 'Add new todo',
+                  ),
+                ))
               ],
             ),
             actions: <Widget>[
@@ -226,10 +228,10 @@ class _HomePageState extends State<HomePage> {
                 trailing: IconButton(
                     icon: (completed)
                         ? Icon(
-                      Icons.done_outline,
-                      color: Colors.green,
-                      size: 20.0,
-                    )
+                            Icons.done_outline,
+                            color: Colors.green,
+                            size: 20.0,
+                          )
                         : Icon(Icons.done, color: Colors.grey, size: 20.0),
                     onPressed: () {
                       updateTodo(_todoList[index]);
@@ -240,10 +242,10 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Center(
           child: Text(
-            "Welcome. Your list is empty",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 30.0),
-          ));
+        "Welcome. Your list is empty",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 30.0),
+      ));
     }
   }
 
@@ -259,136 +261,109 @@ class _HomePageState extends State<HomePage> {
               onPressed: signOut)
         ],
       ),
-      body:new MyStatelessWidget(),
-
+      body:Padding(
+        padding: EdgeInsets.all(16.0),
+            child: MyStatelessWidget()
+      ),
     );
   }
 }
+
 class MyStatelessWidget extends StatelessWidget {
   MyStatelessWidget({Key key}) : super(key: key);
 
-  Future getAllCourses() async
-  {
+  Future getAllCourses() async {
     var firestore = Firestore.instance;
     QuerySnapshot qn = await firestore.collection('course').getDocuments();
     return qn.documents;
   }
 
-  final List<String> entries = <String>['A', 'B', 'C'];
-  final List<int> colorCodes = <int>[600, 500, 100];
-//  final QuerySnapshot result =
-//  await Firestore.instance.collection('course').getDocuments();
-//  final List<DocumentSnapshot> documents = result.documents;
-  //final ref = FirebaseStorage.instance.ref().child('testimage');
-// no need of the file extension, the name will do fine.
- // var url = await ref.getDownloadURL();
+
   @override
   Widget build(BuildContext context) {
-//    return Center(
-//      child: Card(
-//        child: Column(
-//          mainAxisSize: MainAxisSize.min,
-//          children: <Widget>[
-//            const ListTile(
-//              leading: Icon(Icons.album),
-//              title: Text('The Enchanted Nightingale'),
-//              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-//            ),
-//            ButtonBar(
-//              children: <Widget>[
-//                FlatButton(
-//                  child: const Text('BUY TICKETS'),
-//                  onPressed: () { /* ... */ },
-//                ),
-//                FlatButton(
-//                  child: const Text('LISTEN'),
-//                  onPressed: () { /* ... */ },
-//                ),
-//              ],
-//            ),
-//          ],
-//        ),
-//      ),
-//    );
-
-
-
     return Container(
-    child:Card(
-      child:FutureBuilder(
-        future:getAllCourses(),
-        builder:(_,snapshot) {
-    if (snapshot.connectionState == ConnectionState.waiting) {
-    return Center(
-    child: Text("loading..."),
-    );
-    }
-    else {
-    return ListView.builder(
+
+
+            child: FutureBuilder(
+                future: getAllCourses(),
+                builder: (_, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: Text("loading..."),
+                    );
+                  } else {
+                    return ListView.builder(
 //                     padding: const EdgeInsets.all(8),
-    itemCount: snapshot.data.length,
-    itemBuilder: (_, index) {
-//                  return Container(
-//                    height: 50,
-//                    color: Colors.amber[colorCodes[index]],
-//                    child: Center(child: Text(snapshot.data[index].data["name"])),
-//
-//                  );
-    return ListTile(
-    leading: ConstrainedBox(
-    constraints: BoxConstraints(
-    minWidth: 44,
-    minHeight: 44,
-    maxWidth: 64,
-    maxHeight: 64,
-    ),
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (_, index) {
+                          return Container(
+                              child: Card(
+                                child:InkWell(
+                                  onTap: () {
+                                                  final Course course= Course( courseName : (snapshot.data[index].data["name"]).toString(),courseDescription : snapshot.data[index].data["description"],courseImage :snapshot.data[index].data["imageurl"]);
+                          
+                                          
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CourseDetail(course : course,),
+                  // Pass the arguments as part of the RouteSettings. The
+                  // DetailScreen reads the arguments from these settings.
+              
+                ),
+              );
+            
 
-     child: Image.network(snapshot.data[index].data["imageurl"]),
+                                        },
 
-    ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                new Image.network(
+                                    snapshot.data[index].data["imageurl"]),
+                                
+                                ListTile(
+                                  title: Text(snapshot.data[index].data[
+                                      "name"]), // height: 50,                         color: Colors.amber[colorCodes[index]],
+                                  subtitle: Text(
+                                      snapshot.data[index].data["description"]),
+                                ),
+                                ButtonBar(
+                                    children: <Widget>[
+                                     
+                                      RaisedButton(
+                                        child: const Text('DETAILS'),
+                                        onPressed: () {
+                                                  final Course course= Course( courseName : (snapshot.data[index].data["name"]).toString(),courseDescription : snapshot.data[index].data["description"],courseImage :snapshot.data[index].data["imageurl"]);
+                          
+                                          
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CourseDetail(course : course,),
+                  // Pass the arguments as part of the RouteSettings. The
+                  // DetailScreen reads the arguments from these settings.
+              
+                ),
+              );
+            
 
-    title: Text(snapshot.data[index].data["name"]),
-//                         height: 50,
-//                         color: Colors.amber[colorCodes[index]],
-    subtitle: Text(snapshot.data[index].data["description"]),
-    trailing:
-    FlatButton(
-    color: Colors.blue,
-    textColor: Colors.white,
-    disabledColor: Colors.grey,
-    disabledTextColor: Colors.black,
-    padding: EdgeInsets.all(8.0),
-    splashColor: Colors.blueAccent,
-    onPressed: () {
-    /*...*/
-    },
-    child: Text(
-    "buy course",
-    style: TextStyle(fontSize: 20.0),
-    ),
-    ),
-
-    );
-
-
-    }
-    );
-
-    }
-    })
-    )
-    );
-  }
-  }
-
-
-class CustomCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return  new Card(
+                                        },
+                                      ),
+                                    ],
+                                    alignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.max),
+                              ],
+                            ),
+                          
+                          )
+                              /*   Card(
       child: new Column(
         children: <Widget>[
-          new Image.asset('images/logo.jpg'),
+         // child: Image.network(snapshot.data[index].data["imageurl"]),
+          new Image.network(snapshot.data[index].data["imageurl"]),
+           Text(snapshot.data[index].data["name"]),
+            Text(snapshot.data[index].data["description"]),
           new Padding(
               padding: new EdgeInsets.all(7.0),
               child: new Row(
@@ -415,6 +390,11 @@ class CustomCard extends StatelessWidget {
           )
         ],
       ),
-    );
+    )
+          */
+                           ) );
+                        });
+                  }
+                }));
   }
 }
