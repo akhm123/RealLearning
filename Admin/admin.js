@@ -1,5 +1,6 @@
 const express = require('express');
-const app = express();
+const app = express(); 
+
 app.use(function (request, response, next) {
   response.setHeader("Access-Control-Allow-Origin", "*");
   response.setHeader("Access-Control-Allow-Credential", "true");
